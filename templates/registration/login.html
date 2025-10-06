@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Carreras en Liverpool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-color: #E4007C;
+            background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+                              radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+                              url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 18v-8h-1v8H11v1h8v8h1v-8h8v-1h-8z' fill='%23FFFFFF' fill-opacity='0.15'/%3E%3C/svg%3E");
+        }
+        .glow-on-hover {
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 8px rgba(228, 0, 124, 0.6), 0 0 20px rgba(228, 0, 124, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+        <nav class="container mx-auto px-4 lg:px-6 py-3">
+            <div class="flex flex-wrap justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="bg-[#E4007C] p-2 rounded-md">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h6m-6 4h6m-6 4h6"></path></svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">Liverpool <span class="font-light text-gray-600">Carreras</span></span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex flex-1 items-center justify-center p-4">
+        <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl flex overflow-hidden">
+            <div class="hidden md:flex w-1/2 p-12 flex-col justify-center items-center text-white hero-bg">
+                <a href="#" class="flex items-center space-x-3 mb-6">
+                    <div class="bg-white/20 p-2 rounded-md">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h6m-6 4h6m-6 4h6"></path></svg>
+                    </div>
+                    <span class="text-2xl font-bold">Liverpool <span class="font-light">Carreras</span></span>
+                </a>
+                <h2 class="text-3xl font-bold text-center mb-4">El futuro te espera</h2>
+                <p class="text-center text-gray-200">Accede a tu cuenta para gestionar tus aplicaciones y descubrir nuevas oportunidades.</p>
+            </div>
+            <div class="w-full md:w-1/2 p-8 sm:p-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Bienvenido de vuelta</h2>
+                <p class="text-gray-500 mb-8">Inicia sesión para continuar.</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="space-y-5">
+                        
+                        <div>
+                            <label for="{{ form.username.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-700">Nombre de Usuario</label>
+                            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" 
+                                  class="w-full px-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E4007C] focus:border-transparent" 
+                                  placeholder="usuario">
+                            {% if form.username.errors %}
+                                <div class="text-red-500 text-xs mt-1">
+                                    {% for error in form.username.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-700">Contraseña</label>
+                            <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" 
+                                  class="w-full px-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E4007C] focus:border-transparent" 
+                                  placeholder="••••••••">
+                            {% if form.password.errors %}
+                                <div class="text-red-500 text-xs mt-1">
+                                    {% for error in form.password.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="text-red-500 text-sm p-3 bg-red-50 rounded-lg">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                </div>
+                            <div class="text-right">
+                                <a href="#" class="text-sm font-medium text-[#E4007C] hover:text-[#c8006e]">¿Olvidaste tu contraseña?</a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="w-full bg-[#E4007C] text-white py-3 rounded-lg font-semibold hover:bg-[#c8006e] transition-all shadow-sm hover:shadow-md glow-on-hover">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+
+                
+                <div class="mt-8 text-center text-sm text-gray-500">
+                    <p>¿No tienes una cuenta? <a href="#" class="font-semibold text-[#E4007C] hover:text-[#c8006e]">Regístrate ahora</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
+
+{% endblock %}

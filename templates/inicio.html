@@ -6,6 +6,455 @@
 
 {% block content %}
 
-<p>Prueba de HTML</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carreras en Liverpool - Únete al Futuro del Retail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados y mejoras de diseño */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* -- Barra de scroll personalizada -- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e0e0e0; }
+        ::-webkit-scrollbar-thumb { background: #E4007C; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c8006e; }
+
+        .hero-bg {
+            background-color: #E4007C;
+            /* Nuevo patrón de fondo estilo Liverpool con el nuevo color */
+            background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+                              radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 45%),
+                              url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 18v-8h-1v8H11v1h8v8h1v-8h8v-1h-8z' fill='%23FFFFFF' fill-opacity='0.15'/%3E%3C/svg%3E");
+            transition: background-position 0.1s ease-out; /* Para el efecto parallax del mouse */
+        }
+        
+        /* -- Animación de gradiente para el texto </> -- */
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient {
+            background-size: 200% 200%;
+            animation: gradient-animation 4s ease infinite;
+        }
+        
+        .cta-bg {
+            background-color: #E4007C;
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)),
+                              repeating-linear-gradient(-45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+            background-size: 20px 20px;
+        }
+
+        /* -- Efecto de brillo para botones -- */
+        .glow-on-hover {
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .glow-on-hover:hover {
+            box-shadow: 0 0 8px rgba(228, 0, 124, 0.6), 0 0 20px rgba(228, 0, 124, 0.4);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        /* -- Animaciones al hacer scroll -- */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* -- Animación de rebote para icono de CTA -- */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .cta-icon-bounce {
+            animation: bounce 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm transition-shadow duration-300">
+        <nav class="container mx-auto px-4 lg:px-6 py-3">
+            <div class="flex flex-wrap justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="bg-[#E4007C] p-2 rounded-md">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h6m-6 4h6m-6 4h6"></path></svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">Liverpool <span class="font-light text-gray-600">Carreras</span></span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-[#E4007C] transition-colors">Vacantes</a>
+                    <a href="#" class="text-gray-600 hover:text-[#E4007C] transition-colors">Áreas</a>
+                    <a href="#" class="text-gray-600 hover:text-[#E4007C] transition-colors">Cultura</a>
+                </div>
+                <a href="{% url 'login' %}" class="bg-[#E4007C] text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-[#c8006e] transition-all shadow-sm hover:shadow-md glow-on-hover">
+                    Aplicar Ahora
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg relative text-white pt-24 pb-32 overflow-hidden">
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <div class="inline-block bg-white/20 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 backdrop-blur-sm">
+                    ✨ Únete a la Transformación Digital
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">Únete al Futuro del Retail 
+                    <span class="animated-gradient inline-block bg-clip-text text-transparent bg-gradient-to-r from-pink-200 to-white">&lt; /&gt;</span>
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-200 mb-8">
+                    Talento Tech & Digital en Liverpool. Construye tecnología que impacta a millones. Únete al equipo que está revolucionando el retail en México.
+                </p>
+                <a href="#" class="bg-white text-[#E4007C] font-bold px-8 py-3 rounded-lg hover:bg-pink-50 transition-all transform hover:scale-105 shadow-lg inline-flex items-center space-x-2">
+                    <span>Explora Nuestras Vacantes</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+             <!-- Floating Icons -->
+            <div class="absolute top-1/4 left-[15%] opacity-30 transition-transform duration-500 ease-out">
+                <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75"></path>
+                </svg>
+            </div>
+            <div class="absolute bottom-1/4 right-[15%] opacity-30 transition-transform duration-500 ease-out">
+                <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Search and Pillars Section -->
+        <section class="pb-20">
+            <div class="container mx-auto px-4 -mt-20 relative z-20">
+                <!-- Search Card -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl max-w-4xl mx-auto mb-16 scroll-animate">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Encuentra Tu Próxima Oportunidad</h2>
+                    <div class="relative">
+                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" placeholder="Buscar por Título o Habilidad (Ej. Python, Data Science, React)" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#E4007C] focus:border-[#E4007C] transition-all">
+                    </div>
+                    <div class="flex flex-wrap gap-2 justify-center mt-4">
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">Python</button>
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">React</button>
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">Data Science</button>
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">AWS</button>
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">Machine Learning</button>
+                        <button class="bg-gray-100 text-gray-700 text-sm px-3 py-1.5 rounded-full hover:bg-gray-200 transition-colors transform hover:scale-105">Kotlin</button>
+                    </div>
+                </div>
+                
+                <!-- Pillars -->
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-3xl font-extrabold text-gray-900">Pilares de Nuestro Talento</h2>
+                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Descubre las áreas donde estamos construyendo el futuro del retail</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg card-hover group hover:bg-blue-500 scroll-animate">
+                        <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-white/30 group-hover:text-white">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 transition-colors duration-300 group-hover:text-white">Tecnología</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-4 transition-colors duration-300 group-hover:text-blue-100">Innovación digital y desarrollo de soluciones</p>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-700 transition-colors duration-300 group-hover:text-white">
+                            <span>45 vacantes</span>
+                            <span class="transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                     <!-- Card 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg card-hover group hover:bg-[#E4007C] scroll-animate">
+                        <div class="bg-red-100 text-red-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-white/30 group-hover:text-white">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 transition-colors duration-300 group-hover:text-white">Retail Digital</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-4 transition-colors duration-300 group-hover:text-pink-100">E-commerce y experiencia del cliente</p>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-700 transition-colors duration-300 group-hover:text-white">
+                            <span>32 vacantes</span>
+                            <span class="transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                     <!-- Card 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg card-hover group hover:bg-orange-500 scroll-animate">
+                        <div class="bg-orange-100 text-orange-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-white/30 group-hover:text-white">
+                           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 transition-colors duration-300 group-hover:text-white">Logística</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-4 transition-colors duration-300 group-hover:text-orange-100">Supply chain y operaciones inteligentes</p>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-700 transition-colors duration-300 group-hover:text-white">
+                            <span>28 vacantes</span>
+                            <span class="transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                     <!-- Card 4 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg card-hover group hover:bg-green-500 scroll-animate">
+                        <div class="bg-green-100 text-green-600 w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-white/30 group-hover:text-white">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 transition-colors duration-300 group-hover:text-white">Finanzas</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-4 transition-colors duration-300 group-hover:text-green-100">Análisis financiero y estrategia</p>
+                        <a href="#" class="flex justify-between items-center text-sm font-semibold text-gray-700 transition-colors duration-300 group-hover:text-white">
+                            <span>19 vacantes</span>
+                            <span class="transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Liverpool Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12 scroll-animate">
+                     <div class="inline-block bg-pink-100 text-[#E4007C] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+                        ⚡ ¿Por Qué Liverpool?
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-900">Tu Carrera, Impulsada</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 card-hover border border-gray-100 why-liverpool-card scroll-animate">
+                        <div class="bg-pink-100 text-[#E4007C] w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Tecnologías de Vanguardia</h3>
+                            <p class="text-sm text-gray-500 mt-1">Trabaja con las últimas herramientas y frameworks.</p>
+                        </div>
+                    </div>
+                     <!-- Feature 2 -->
+                    <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 card-hover border border-gray-100 why-liverpool-card scroll-animate">
+                        <div class="bg-pink-100 text-[#E4007C] w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Impacto a Millones</h3>
+                            <p class="text-sm text-gray-500 mt-1">Tus decisiones afectan a millones de clientes.</p>
+                        </div>
+                    </div>
+                     <!-- Feature 3 -->
+                    <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 card-hover border border-gray-100 why-liverpool-card scroll-animate">
+                        <div class="bg-pink-100 text-[#E4007C] w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3M5.636 5.636l1.414 1.414m10.05 10.05l1.414 1.414M5.636 18.364l1.414-1.414m10.05-10.05l1.414-1.414"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Crecimiento Profesional</h3>
+                            <p class="text-sm text-gray-500 mt-1">Desarrollo continuo y planes de carrera claros.</p>
+                        </div>
+                    </div>
+                     <!-- Feature 4 -->
+                    <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 card-hover border border-gray-100 why-liverpool-card scroll-animate">
+                        <div class="bg-pink-100 text-[#E4007C] w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5 11v4m-2-2h4"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Cultura de Innovación</h3>
+                            <p class="text-sm text-gray-500 mt-1">Ambiente colaborativo que valora nuevas ideas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact-section" class="py-20 bg-gray-800 text-white" style="background-color: #0d1d3a;">
+            <div class="container mx-auto px-4 text-center">
+                <div class="scroll-animate">
+                    <h2 class="text-3xl font-extrabold">El Impacto de Liverpool</h2>
+                    <p class="text-gray-400 mt-2 mb-12">Números que demuestran nuestra escala y alcance</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="scroll-animate">
+                        <p class="text-5xl font-bold text-pink-300"><span class="counter-value" data-target="170">0</span>+</p>
+                        <p class="text-gray-300 mt-2">Años de Historia</p>
+                    </div>
+                     <div class="scroll-animate">
+                        <p class="text-5xl font-bold text-pink-300"><span class="counter-value" data-target="50">0</span>M+</p>
+                        <p class="text-gray-300 mt-2">Clientes al Año</p>
+                    </div>
+                     <div class="scroll-animate">
+                        <p class="text-5xl font-bold text-pink-300"><span class="counter-value" data-target="1200">0</span>+</p>
+                        <p class="text-gray-300 mt-2">Tiendas</p>
+                    </div>
+                     <div class="scroll-animate">
+                        <p class="text-5xl font-bold text-pink-300"><span class="counter-value" data-target="100">0</span>K+</p>
+                        <p class="text-gray-300 mt-2">Colaboradores</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Final CTA Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="cta-bg text-white max-w-4xl mx-auto p-12 text-center rounded-2xl shadow-2xl scroll-animate">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-6 cta-icon-container">
+                        <svg class="w-8 h-8 text-[#E4007C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h2 class="text-4xl font-extrabold mb-4">¿Listo para el Desafío?</h2>
+                    <p class="max-w-xl mx-auto mb-8 text-pink-100">
+                        Únete a más de 100,000 colaboradores que están transformando la experiencia de compra en México
+                    </p>
+                    <a href="#" class="bg-white text-[#E4007C] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                        Ver Todas las Vacantes &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white" style="background-color: #0d1d3a;">
+        <div class="container mx-auto px-4 py-12 text-center">
+            <h3 class="font-semibold text-gray-400 mb-4">Nuestras Divisiones</h3>
+            <div class="flex justify-center items-center space-x-8 mb-8">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h6m-6 4h6m-6 4h6"></path></svg>
+                    <span class="font-medium">Liverpool</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                     <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span class="font-medium">Suburbia</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <span class="font-medium">Boutiques</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500">&copy; 2024 El Puerto de Liverpool. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // -- Todas las interacciones de la página --
+
+    // 1. Efecto Parallax para los íconos del Hero
+    const heroIcons = document.querySelectorAll('.hero-bg .absolute');
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        heroIcons.forEach(icon => {
+            const speed = icon.classList.contains('top-1/4') ? -0.1 : -0.15;
+            icon.style.transform = `translateY(${scrollPosition * speed}px)`;
+        });
+    });
+    
+    // 2. Efecto Parallax en el fondo del Hero con el movimiento del mouse
+    const hero = document.querySelector('.hero-bg');
+    hero.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = hero;
+        const x = (clientX / offsetWidth - 0.5) * 20; // Factor de movimiento reducido
+        const y = (clientY / offsetHeight - 0.5) * 20;
+        hero.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
+    });
+
+
+    // 3. Iconos interactivos en la sección "¿Por Qué Liverpool?"
+    const featureCards = document.querySelectorAll('.why-liverpool-card');
+    featureCards.forEach(card => {
+        const icon = card.querySelector('svg');
+        if (icon) {
+            card.addEventListener('mouseenter', () => {
+                icon.style.transition = 'transform 0.3s ease-in-out';
+                icon.style.transform = 'rotate(10deg) scale(1.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                icon.style.transform = 'rotate(0deg) scale(1)';
+            });
+        }
+    });
+
+    // 4. Animación de contadores para la sección de Impacto
+    const impactSection = document.querySelector('#impact-section');
+    const counters = document.querySelectorAll('.counter-value');
+    let hasAnimatedCounters = false;
+
+    const animateCounters = () => {
+        if (hasAnimatedCounters) return;
+        hasAnimatedCounters = true;
+
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000;
+            let startTimestamp = null;
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = Math.floor(progress * target);
+                counter.innerText = currentValue.toLocaleString('es-ES');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    counter.innerText = target.toLocaleString('es-ES');
+                }
+            };
+            window.requestAnimationFrame(step);
+        });
+    };
+
+    // 5. Animación de rebote para el ícono del CTA
+    const ctaContainer = document.querySelector('.cta-icon-container');
+    if (ctaContainer) {
+        const ctaIcon = ctaContainer.querySelector('svg');
+        ctaContainer.parentElement.addEventListener('mouseenter', () => ctaIcon.classList.add('cta-icon-bounce'));
+        ctaContainer.parentElement.addEventListener('mouseleave', () => ctaIcon.classList.remove('cta-icon-bounce'));
+    }
+
+    // 6. Intersection Observer para animar elementos al hacer scroll
+    const animatedElements = document.querySelectorAll('.scroll-animate');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Añadir un pequeño retraso escalonado a los elementos
+                const delay = entry.target.dataset.delay || (index % 4) * 100; // delay de 0, 100, 200, 300ms
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, delay);
+
+                // Animar contadores si la sección de impacto es visible
+                if (entry.target.closest('#impact-section')) {
+                    animateCounters();
+                }
+
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // 7. Sombra en el header al hacer scroll (ya se maneja con sticky y shadow-sm)
+});
+</script>
+
+</body>
+</html>
 
 {% endblock content %}
