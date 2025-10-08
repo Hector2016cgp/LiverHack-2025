@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Liverpool Gestión de Talento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilos para scrollbars para un look más limpio */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex min-h-screen">
+
+        <!-- Contenido Principal -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header (Mobile) -->
+            <header class="lg:hidden flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-20">
+                 <div class="flex items-center gap-3">
+                    <div class="bg-pink-600 p-2 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-slate-900">Liverpool</h1>
+                    </div>
+                </div>
+                <button id="menu-toggle" class="text-slate-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </header>
+
+            <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+                <!-- Título del Panel -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-slate-900">Panel de Control</h1>
+                    <p class="text-slate-500 mt-1">Vista general del proceso de reclutamiento</p>
+                </div>
+
+                <!-- Tarjetas de Resumen -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+                    <!-- Tarjeta 1: Vacantes Activas -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/50 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                             <div class="bg-blue-100 text-blue-600 p-3 rounded-lg">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </div>
+                            <span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">+12%</span>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold mt-4">4</p>
+                            <p class="text-slate-500 text-sm">Vacantes Activas</p>
+                            <p class="text-slate-400 text-xs mt-1">vs. mes anterior</p>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 2: Candidatos en Proceso -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/50 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                             <div class="bg-orange-100 text-orange-600 p-3 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full">+8%</span>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold mt-4">6</p>
+                            <p class="text-slate-500 text-sm">Candidatos en Proceso</p>
+                             <p class="text-slate-400 text-xs mt-1">en revisión activa</p>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 3: Contrataciones -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/50 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                             <div class="bg-teal-100 text-teal-600 p-3 rounded-lg">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold mt-4">1</p>
+                            <p class="text-slate-500 text-sm">Contrataciones</p>
+                             <p class="text-slate-400 text-xs mt-1">este mes</p>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 4: Urgentes -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/50 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                             <div class="bg-red-100 text-red-600 p-3 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            </div>
+                        </div>
+                         <div>
+                            <p class="text-3xl font-bold mt-4">1</p>
+                            <p class="text-slate-500 text-sm">Urgentes</p>
+                            <p class="text-slate-400 text-xs mt-1">prioridad alta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vacantes y Gráfico -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Sección de Vacantes Recientes -->
+
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200/50">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4">Vacantes Recientes</h2>
+                    
+                    <div class="space-y-4">
+                        {% for vacante in vacantes_recientes %}
+                            <div class="border p-4 rounded-lg hover:shadow-md transition-shadow">
+                                <h3 class="font-bold text-slate-800">{{ vacante.titulo }}</h3>
+                                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-2 text-sm">
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-semibold">Abierta</span>
+                                    <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs font-semibold">Prioridad {{ vacante.prioridad }}</span>
+                                    <span class="text-slate-500 flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>{{ vacante.departamento }}</span>
+                                    <span class="text-slate-500 flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>{{ vacante.ubicacion }}</span>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-sm text-slate-500 border-t pt-3">
+                                    <span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>{{ vacante.tipo_contrato }}</span>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="text-slate-500">No hay vacantes recientes para mostrar.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                    <!-- Gráfico de Vacantes por Departamento -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/50">
+                        <h2 class="text-lg font-bold text-slate-900 mb-4">Vacantes por Departamento</h2>
+                        <div class="w-full h-64 flex items-end justify-around space-x-2">
+                            <!-- Bar Chart -->
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full h-full bg-blue-500 rounded-t-lg" style="height: 100%;"></div>
+                                <span class="text-xs text-slate-500 mt-2">Marketing</span>
+                            </div>
+                             <div class="flex flex-col items-center flex-1">
+                                <div class="w-full h-full bg-blue-800 rounded-t-lg" style="height: 100%;"></div>
+                                <span class="text-xs text-slate-500 mt-2">Tecnología</span>
+                            </div>
+                             <div class="flex flex-col items-center flex-1">
+                                <div class="w-full h-full bg-red-500 rounded-t-lg" style="height: 100%;"></div>
+                                <span class="text-xs text-slate-500 mt-2">Logística</span>
+                            </div>
+                             <div class="flex flex-col items-center flex-1">
+                                <div class="w-full h-full bg-orange-500 rounded-t-lg" style="height: 100%;"></div>
+                                <span class="text-xs text-slate-500 mt-2 text-center">Servicio al Cliente</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1">
+                                <div class="w-full h-full bg-teal-500 rounded-t-lg" style="height: 100%;"></div>
+                                <span class="text-xs text-slate-500 mt-2">Ventas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notificación de Atención Requerida -->
+                <div class="mt-8 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg flex items-start gap-4 shadow-md">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    </div>
+                    <div>
+                        <p class="font-bold">Atención Requerida</p>
+                        <p class="text-sm">Tienes <span class="font-semibold">1 vacante urgente</span> que requiere atención prioritaria. Revisa el estatus de estas posiciones para acelerar el proceso.</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+
+            // Clonar la barra lateral para el menú móvil
+            const mobileMenu = sidebar.cloneNode(true);
+            mobileMenu.id = 'mobile-menu';
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('fixed', 'top-0', 'left-0', 'h-full', 'z-30', 'transform', '-translate-x-full', 'lg:hidden', 'bg-white', 'w-64');
+            document.body.appendChild(mobileMenu);
+
+            const overlay = document.createElement('div');
+            overlay.id = 'overlay';
+            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden';
+            document.body.appendChild(overlay);
+
+            const openMenu = () => {
+                mobileMenu.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            };
+
+            const closeMenu = () => {
+                mobileMenu.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            };
+
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (mobileMenu.classList.contains('-translate-x-full')) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
+            });
+
+            overlay.addEventListener('click', closeMenu);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "Escape") {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Vacantes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Applying Inter as the default font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for better design replication */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        .tag-green {
+            background-color: #d1fae5; /* green-200 */
+            color: #065f46; /* green-800 */
+        }
+        .tag-blue {
+            background-color: #dbeafe; /* blue-200 */
+            color: #1e40af; /* blue-800 */
+        }
+        .tag-red {
+            background-color: #fee2e2; /* red-200 */
+            color: #991b1b; /* red-800 */
+        }
+        .tag-yellow {
+            background-color: #fef3c7; /* yellow-200 */
+            color: #92400e; /* yellow-800 */
+        }
+        .tag-gray {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #374151; /* gray-700 */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <!-- Main Content Container -->
+    <div class="w-full max-w-7xl mx-auto bg-white rounded-xl shadow-sm p-6 sm:p-8">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Gestión de Vacantes</h1>
+                <p class="text-gray-500 mt-1">Administra las posiciones abiertas</p>
+            </div>
+            <button class="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 mt-4 sm:mt-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Nueva Vacante
+            </button>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <div class="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+            <!-- Search Bar -->
+            <div class="relative w-full sm:w-1/2 lg:w-1/3">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input type="text" placeholder="Buscar por título, departamento o ubicación..." class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition">
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex items-center bg-gray-100 p-1 rounded-lg">
+                <button class="px-4 py-1.5 text-sm font-semibold text-gray-700 bg-white rounded-md shadow-sm focus:outline-none">Todas</button>
+                <button class="px-4 py-1.5 text-sm font-semibold text-gray-500 hover:text-gray-700 focus:outline-none">Abiertas</button>
+                <button class="px-4 py-1.5 text-sm font-semibold text-gray-500 hover:text-gray-700 focus:outline-none">En Proceso</button>
+                <button class="px-4 py-1.5 text-sm font-semibold text-gray-500 hover:text-gray-700 focus:outline-none">Cerradas</button>
+            </div>
+        </div>
+
+        <!-- Vacancies Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Departamento</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ubicación</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Table Row 1 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Analista de Marketing Digital</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Marketing</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Guadalajara</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="tag tag-green">Abierta</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                             <span class="tag tag-yellow">Media</span>
+                        </td>
+                    </tr>
+                    <!-- Table Row 2 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Desarrollador Full Stack</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tecnología</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Remoto</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="tag tag-blue">En Proceso</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                             <span class="tag tag-red">Alta</span>
+                        </td>
+                    </tr>
+                    <!-- Table Row 3 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Coordinador de Logística</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Logística</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Monterrey</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="tag tag-green">Abierta</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                             <span class="tag tag-yellow">Media</span>
+                        </td>
+                    </tr>
+                    <!-- Table Row 4 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ejecutivo de Atención al Cliente</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Servicio al Cliente</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ciudad de México</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="tag tag-gray">Cerrada</span>
+                        </td>
+                         <td class="px-6 py-4 whitespace-nowrap">
+                             <span class="tag tag-gray">Baja</span>
+                        </td>
+                    </tr>
+                    <!-- Table Row 5 -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Gerente de Ventas - Zona Centro</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ventas</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Ciudad de México</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="tag tag-green">Abierta</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                             <span class="tag tag-red">Alta</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock content %}

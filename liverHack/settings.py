@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reclutamiento',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -131,5 +132,6 @@ MEDIA_ROOT = BASE_DIR/ 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Redirigir a los usuarios al inicio y cierre de sesión 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'reclutamiento_app:plantilla_admin'
 LOGOUT_REDIRECT_URL = '/'

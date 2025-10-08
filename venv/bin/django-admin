@@ -1,4 +1,4 @@
-#!/home/hectorcowba/Escritorio/liverHack/venv/bin/python3
+#!/home/hectorcowba/Escritorio/LiverHack-2025/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
