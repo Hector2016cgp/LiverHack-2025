@@ -65,7 +65,7 @@ class VacantesDisponiblesView(LoginRequiredMixin, ListView):
     Lista las vacantes activas disponibles para postular.
     """
     model = Vacante
-    template_name = 'candidatos/vacantes_disponibles.html'  # Corregí la ruta
+    template_name = 'candidatos/vacantes_lista.html' 
     context_object_name = 'vacantes'
 
     def get_queryset(self):

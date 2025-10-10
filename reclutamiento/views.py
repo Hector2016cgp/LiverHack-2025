@@ -29,7 +29,6 @@ def crear_vacante(request):
         form = VacanteForm()
     return render(request, 'admin/crear_vacantes.html', {'form': form})
 
-
 @method_decorator(staff_member_required, name='dispatch')
 class DashboardView(ListView):
     model = Vacante
@@ -39,10 +38,18 @@ class DashboardView(ListView):
     def get_queryset(self):
         return Vacante.objects.all()[:5]
 
-
 @method_decorator(staff_member_required, name='dispatch')
-class ListaVacantes(TemplateView):
+class ListaVacantes(ListView):
+    model = Vacante
     template_name = "admin/vacantes_lista.html"
+    context_object_name = "vacantes"
+
+    def get_queryset(self):
+        query = self.request.GET.get("search")
+        qs = Vacante.objects.all()
+        if query:
+            qs = qs.filter(titulo__icontains=query)
+        return qs
 
 # ================================
 # VISTAS DE AUTENTICACIÓN

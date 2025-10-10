@@ -1,192 +1,143 @@
 {% extends 'base.html' %}
-
 {% load widget_tweaks %}
 
 {% block content %}
+<div class="flex min-h-screen bg-slate-50 text-slate-800">
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Nueva Vacante - Liverpool</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Estilo para el placeholder del datepicker en Chrome/Edge */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
-            opacity: 0.6;
-        }
-        input[type="date"]:in-range::-webkit-datetime-edit-year-field, 
-        input[type="date"]:in-range::-webkit-datetime-edit-month-field, 
-        input[type="date"]:in-range::-webkit-datetime-edit-day-field {
-            color: transparent;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800">
+    <div class="flex-1 flex flex-col">
+        <header class="lg:hidden flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <div class="bg-pink-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <h1 class="font-bold text-lg text-slate-900">Liverpool</h1>
+            </div>
+            <button id="menu-toggle" class="text-slate-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </header>
 
-    <div class="flex min-h-screen">
+        <main class="flex-1 p-4 sm:p-6 lg:p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-slate-900">Crear Nueva Vacante</h1>
+                <p class="text-slate-500 mt-1">Completa la información para publicar una nueva posición.</p>
+            </div>
 
-        <div class="flex-1 flex flex-col">
-            <header class="lg:hidden flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-20">
-                 <div class="flex items-center gap-3">
-                    <div class="bg-pink-600 p-2 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-slate-200/50">
+                <h2 class="text-xl font-bold text-slate-800 mb-8 border-b pb-4">Información de la Vacante</h2>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                        <div>
+                            <label for="{{ form.titulo.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.titulo.label }} <span class="text-red-500">*</span></label>
+                            {% render_field form.titulo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Ej: Gerente de Ventas" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.departamento.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.departamento.label }} <span class="text-red-500">*</span></label>
+                            {% render_field form.departamento class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.ubicacion.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.ubicacion.label }} <span class="text-red-500">*</span></label>
+                            {% render_field form.ubicacion class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Ej: Ciudad de México" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.nivel.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.nivel.label }}</label>
+                            {% render_field form.nivel class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.tipo_contrato.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.tipo_contrato.label }}</label>
+                            {% render_field form.tipo_contrato class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.prioridad.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.prioridad.label }}</label>
+                            {% render_field form.prioridad class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.salario_minimo.id_for_label }}" class="block text-sm font-medium text-slate-700">Salario Mínimo (MXN)</label>
+                            {% render_field form.salario_minimo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="15000" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.salario_maximo.id_for_label }}" class="block text-sm font-medium text-slate-700">Salario Máximo (MXN)</label>
+                            {% render_field form.salario_maximo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="25000" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.fecha_cierre.id_for_label }}" class="block text-sm font-medium text-slate-700">Fecha Cierre</label>
+                            {% render_field form.fecha_cierre class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="dd / mm / aaaa" %}
+                        </div>
+
+                        <div>
+                            <label for="{{ form.responsable_rh.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.responsable_rh.label }}</label>
+                            {% render_field form.responsable_rh class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Nombre del reclutador" %}
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-lg text-slate-900">Liverpool</h1>
+
+                    <div class="mt-6 space-y-6">
+                        <div>
+                            <label for="{{ form.descripcion.id_for_label }}" class="block text-sm font-medium text-slate-700">Descripción del Puesto</label>
+                            {% render_field form.descripcion class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 min-h-[120px]" placeholder="Describe las responsabilidades y el rol..." %}
+                        </div>
+                        <div>
+                            <label for="{{ form.requisitos.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.requisitos.label }}</label>
+                            {% render_field form.requisitos class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 min-h-[120px]" placeholder="Lista los requisitos y habilidades necesarias..." %}
+                        </div>
                     </div>
-                </div>
-                <button id="menu-toggle" class="text-slate-800 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </header>
 
-            <main class="flex-1 p-4 sm:p-6 lg:p-8">
-
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-slate-900">Crear Nueva Vacante</h1>
-                    <p class="text-slate-500 mt-1">Completa la información para publicar una nueva posición.</p>
-                </div>
-
-                <div class="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-slate-200/50">
-                    <h2 class="text-xl font-bold text-slate-800 mb-8 border-b pb-4">Información de la Vacante</h2>
-                    
-                    <form method="post" novalidate>
-                        {% csrf_token %}
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
-                            
-                            <div>
-                                <label for="{{ form.titulo.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.titulo.label }} <span class="text-red-500">*</span></label>
-                                {% render_field form.titulo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Ej: Gerente de Ventas" %}
-                            </div>
-                            
-                            <div>
-                                <label for="{{ form.departamento.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.departamento.label }} <span class="text-red-500">*</span></label>
-                                {% render_field form.departamento class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
-                            </div>
-                            
-                            <div>
-                                <label for="{{ form.ubicacion.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.ubicacion.label }} <span class="text-red-500">*</span></label>
-                                {% render_field form.ubicacion class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Ej: Ciudad de México" %}
-                            </div>
-                            
-                            <div>
-                                <label for="{{ form.nivel.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.nivel.label }}</label>
-                                {% render_field form.nivel class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
-                            </div>
-                            
-                            <div>
-                                <label for="{{ form.tipo_contrato.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.tipo_contrato.label }}</label>
-                                {% render_field form.tipo_contrato class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
-                            </div>
-
-                            <div>
-                                <label for="{{ form.prioridad.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.prioridad.label }}</label>
-                                {% render_field form.prioridad class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" %}
-                            </div>
-
-                            <div>
-                                <label for="{{ form.salario_minimo.id_for_label }}" class="block text-sm font-medium text-slate-700">Salario Mínimo (MXN)</label>
-                                {% render_field form.salario_minimo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="15000" %}
-                            </div>
-
-                            <div>
-                                <label for="{{ form.salario_maximo.id_for_label }}" class="block text-sm font-medium text-slate-700">Salario Máximo (MXN)</label>
-                                {% render_field form.salario_maximo class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="25000" %}
-                            </div>
-
-                            <!-- <div>
-                                <label for="{{ form.fecha_cierre.id_for_label }}" class="block text-sm font-medium text-slate-700">Fecha Cierre</label>
-                                {% render_field form.fecha_publi class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="dd / mm / aaaa" %}
-                            </div> -->
-
-                            <div>
-                                <label for="{{ form.fecha_cierre.id_for_label }}" class="block text-sm font-medium text-slate-700">Fecha Cierre</label>
-                                {% render_field form.fecha_cierre class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="dd / mm / aaaa" %}
-                            </div>
-
-                            <div>
-                                <label for="{{ form.responsable_rh.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.responsable_rh.label }}</label>
-                                {% render_field form.responsable_rh class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500" placeholder="Nombre del reclutador" %}
-                            </div>
-                        </div>
-
-                        <div class="mt-6 space-y-6">
-                            <div>
-                                <label for="{{ form.descripcion.id_for_label }}" class="block text-sm font-medium text-slate-700">Descripción del Puesto</label>
-                                {% render_field form.descripcion class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 min-h-[120px]" placeholder="Describe las responsabilidades y el rol..." %}
-                            </div>
-                            <div>
-                                <label for="{{ form.requisitos.id_for_label }}" class="block text-sm font-medium text-slate-700">{{ form.requisitos.label }}</label>
-                                {% render_field form.requisitos class="mt-1 block w-full rounded-md border-gray-400 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 min-h-[120px]" placeholder="Lista los requisitos y habilidades necesarias..." %}
-                            </div>
-                        </div>
-
-                        <div class="mt-8 pt-6 border-t border-slate-200 flex justify-end gap-3">
-                            <a href="#" class="bg-slate-100 text-slate-700 font-semibold px-5 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">Cancelar</a>
-                            <button type="submit" class="bg-pink-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors">Publicar Vacante</button>
-                        </div>
-                    </form>
-                </div>
-            </main>
-        </div>
+                    <div class="mt-8 pt-6 border-t border-slate-200 flex justify-end gap-3">
+                        <a href="{% url 'reclutamiento_app:plantilla_admin' %}" class="bg-slate-100 text-slate-700 font-semibold px-5 py-2.5 rounded-lg hover:bg-slate-200 transition-colors">Cancelar</a>
+                        <button type="submit" class="bg-pink-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors">Publicar Vacante</button>
+                    </div>
+                </form>
+            </div>
+        </main>
     </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.getElementById('menu-toggle');
-            const sidebar = document.getElementById('sidebar');
+</div>
 
-            // Clonar la barra lateral para el menú móvil
-            const mobileMenu = sidebar.cloneNode(true);
-            mobileMenu.id = 'mobile-menu';
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.classList.add('fixed', 'top-0', 'left-0', 'h-full', 'z-30', 'transform', '-translate-x-full', 'lg:hidden', 'bg-white', 'w-64');
-            document.body.appendChild(mobileMenu);
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
 
-            const overlay = document.createElement('div');
-            overlay.id = 'overlay';
-            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden';
-            document.body.appendChild(overlay);
+    if (!menuToggle || !sidebar) return;
 
-            const openMenu = () => {
-                mobileMenu.classList.remove('-translate-x-full');
-                overlay.classList.remove('hidden');
-            };
+    const mobileMenu = sidebar.cloneNode(true);
+    mobileMenu.id = 'mobile-menu';
+    mobileMenu.classList.remove('hidden');
+    mobileMenu.classList.add('fixed', 'top-0', 'left-0', 'h-full', 'z-30', 'transform', '-translate-x-full', 'lg:hidden', 'bg-white', 'w-64');
+    document.body.appendChild(mobileMenu);
 
-            const closeMenu = () => {
-                mobileMenu.classList.add('-translate-x-full');
-                overlay.classList.add('hidden');
-            };
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden';
+    document.body.appendChild(overlay);
 
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (mobileMenu.classList.contains('-translate-x-full')) {
-                    openMenu();
-                } else {
-                    closeMenu();
-                }
-            });
+    const openMenu = () => {
+        mobileMenu.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+    };
 
-            overlay.addEventListener('click', closeMenu);
-            document.addEventListener('keydown', (e) => {
-                if (e.key === "Escape") {
-                    closeMenu();
-                }
-            });
-        });
-    </script>
-    
-</body>
-</html>
+    const closeMenu = () => {
+        mobileMenu.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    };
 
+    menuToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        mobileMenu.classList.contains('-translate-x-full') ? openMenu() : closeMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => {
+        if (e.key === "Escape") closeMenu();
+    });
+});
+</script>
 {% endblock content %}
