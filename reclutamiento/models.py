@@ -5,6 +5,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Vacante(models.Model):
+    ESTADO_CHOICES = [
+        ('Abierta', 'Abierta'),
+        ('En Proceso', 'En Proceso'),
+        ('Cerrada', 'Cerrada'),
+    ]
+
     TIPO_CONTRATO_CHOICES = [
         ('Tiempo Completo', 'Tiempo Completo'),
         ('Medio Tiempo', 'Medio Tiempo'),
@@ -39,6 +45,7 @@ class Vacante(models.Model):
 
     titulo = models.CharField(max_length=200, verbose_name="Título del Puesto")
     departamento = models.CharField(max_length=50, choices=AREA_CHOICES)
+    estado = models.CharField(max_length=50, choices=ESTADO_CHOICES, default='Abierta')
     ubicacion = models.CharField(max_length=100)
     nivel = models.CharField(max_length=50)
     tipo_contrato = models.CharField(max_length=50, choices=TIPO_CONTRATO_CHOICES, default='Tiempo Completo')
