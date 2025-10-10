@@ -20,7 +20,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('reclutamiento.urls')),
-
+    path('candidatos/', include("candidatos.urls")),
     #Para inicio de sesión del boton 'Aplicar Ahora' del banner principal
-    path('accounts/', include('django.contrib.auth.urls')), 
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reclutamiento',
+    'candidatos',
     'widget_tweaks',
 ]
 
@@ -77,11 +78,7 @@ WSGI_APPLICATION = 'liverHack.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'liverHack_db',
-        'USER': 'multimedia',
-        'PASSWORD': 'multimediapass',
-        'HOST': 'localhost',
-        'PORT': '5432', 
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -133,5 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Redirigir a los usuarios al inicio y cierre de sesión 
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = 'reclutamiento_app:plantilla_admin'
+LOGIN_REDIRECT_URL = 'reclutamiento_app:login_redirect'
 LOGOUT_REDIRECT_URL = '/'
